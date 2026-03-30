@@ -11,9 +11,10 @@
 
 :root {
 –bg: #0a0908;
-–bg2: #0f0e0c;
+–bg2: #0d0c0a;
+–bg3: #111009;
 –paper: #f0ece4;
-–muted: rgba(240,236,228,0.4);
+–muted: rgba(240,236,228,0.45);
 –accent: #c8b89a;
 –line: rgba(240,236,228,0.1);
 }
@@ -44,7 +45,7 @@ inset: 0;
 background-image: url(‘cover.jpg’);
 background-size: cover;
 background-position: center 20%;
-filter: brightness(0.15) saturate(0.5);
+filter: brightness(0.13) saturate(0.5);
 transform: scale(1.05);
 animation: slowZoom 20s ease-out forwards;
 }
@@ -63,7 +64,17 @@ animation: driftUp 24s ease-in-out infinite alternate;
 .hero-vignette {
 position: absolute;
 inset: 0;
-background: radial-gradient(ellipse at center, rgba(10,9,8,0.3) 0%, rgba(10,9,8,0.92) 100%);
+background: radial-gradient(ellipse at center, rgba(10,9,8,0.2) 0%, rgba(10,9,8,0.95) 100%);
+}
+
+/* полоска снизу героя */
+.hero-bottom-line {
+position: absolute;
+bottom: 0;
+left: 0; right: 0;
+height: 1px;
+background: linear-gradient(to right, transparent, var(–accent), transparent);
+z-index: 3;
 }
 
 .hero-content {
@@ -150,7 +161,7 @@ transform: translateY(-50%) rotate(90deg);
 font-family: ‘Cormorant Garamond’, serif;
 font-size: 180px;
 font-weight: 300;
-color: rgba(240,236,228,0.025);
+color: rgba(240,236,228,0.02);
 pointer-events: none;
 letter-spacing: 0.1em;
 white-space: nowrap;
@@ -185,7 +196,7 @@ margin-bottom: 2px;
 }
 
 .part-card {
-background: rgba(240,236,228,0.04);
+background: rgba(240,236,228,0.03);
 border: 1px solid var(–line);
 padding: 40px 28px;
 position: relative;
@@ -218,7 +229,7 @@ transform: scaleX(1);
 font-family: ‘Cormorant Garamond’, serif;
 font-size: 48px;
 font-weight: 300;
-color: rgba(200,184,154,0.25);
+color: rgba(200,184,154,0.2);
 line-height: 1;
 margin-bottom: 20px;
 transition: color 0.3s ease;
@@ -245,8 +256,8 @@ letter-spacing: 0.04em;
 }
 
 .part-card-special {
-background: rgba(200,184,154,0.05);
-border: 1px solid rgba(200,184,154,0.2);
+background: rgba(200,184,154,0.04);
+border: 1px solid rgba(200,184,154,0.18);
 padding: 40px 48px;
 position: relative;
 overflow: hidden;
@@ -258,7 +269,7 @@ gap: 60px;
 }
 
 .part-card-special:hover {
-background: rgba(200,184,154,0.1);
+background: rgba(200,184,154,0.09);
 }
 
 .part-card-special::before {
@@ -266,7 +277,7 @@ content: ‘’;
 position: absolute;
 inset: 0;
 background: url(‘smoke.jpg’) center/cover;
-opacity: 0.05;
+opacity: 0.04;
 mix-blend-mode: screen;
 pointer-events: none;
 }
@@ -318,11 +329,13 @@ background: linear-gradient(to right, var(–accent), transparent);
 
 /* ─── ABOUT ─── */
 .about-section {
+background: var(–bg3);
 padding: 120px 80px;
 display: grid;
 grid-template-columns: 1.6fr 1fr;
 gap: 100px;
 align-items: center;
+border-top: 1px solid var(–line);
 }
 
 .section-tag {
@@ -346,7 +359,7 @@ margin-bottom: 32px;
 .about-body {
 font-size: 15px;
 line-height: 1.9;
-color: rgba(240,236,228,0.65);
+color: rgba(240,236,228,0.6);
 }
 
 .about-body p + p { margin-top: 18px; }
@@ -361,7 +374,7 @@ justify-content: center;
 width: 100%;
 max-width: 300px;
 display: block;
-box-shadow: 0 60px 120px rgba(0,0,0,0.9), 0 8px 32px rgba(0,0,0,0.6);
+box-shadow: 0 60px 120px rgba(0,0,0,0.95), 0 8px 32px rgba(0,0,0,0.7);
 position: relative;
 z-index: 1;
 }
@@ -370,7 +383,7 @@ z-index: 1;
 position: absolute;
 width: 300px;
 height: 300px;
-background: radial-gradient(circle, rgba(200,184,154,0.1) 0%, transparent 70%);
+background: radial-gradient(circle, rgba(200,184,154,0.08) 0%, transparent 70%);
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
@@ -483,11 +496,7 @@ transition: transform 0.35s ease;
 .order-btn:hover { color: var(–bg); border-color: var(–accent); }
 .order-btn:hover::before { transform: translateX(0); }
 
-.order-btn span, .order-btn svg {
-position: relative;
-z-index: 1;
-}
-
+.order-btn span, .order-btn svg { position: relative; z-index: 1; }
 .order-btn svg { transition: transform 0.3s ease; }
 .order-btn:hover svg { transform: translateX(5px); }
 
@@ -498,6 +507,7 @@ border-top: 1px solid var(–line);
 display: flex;
 justify-content: space-between;
 align-items: center;
+background: var(–bg);
 }
 
 .f-title {
@@ -554,6 +564,7 @@ footer { padding: 28px 24px; flex-direction: column; gap: 10px; text-align: cent
 <div class="hero-bg"></div>
 <div class="hero-smoke"></div>
 <div class="hero-vignette"></div>
+<div class="hero-bottom-line"></div>
 <div class="hero-content">
 <p class="hero-eyebrow">Шаршевич Ярослав — 2026</p>
 <h1 class="hero-title">Вздох</h1>
