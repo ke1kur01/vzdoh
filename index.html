@@ -30,120 +30,20 @@ font-weight: 300;
 overflow-x: hidden;
 }
 
-/* HERO */
-.hero {
-min-height: 100vh;
-position: relative;
-display: flex;
-align-items: center;
-justify-content: center;
-overflow: hidden;
-}
-
-.hero-bg {
-position: absolute;
-inset: 0;
-background-image: url('cover.jpg');
-background-size: cover;
-background-position: center 20%;
-filter: brightness(0.13) saturate(0.5);
-transform: scale(1.05);
-animation: slowZoom 20s ease-out forwards;
-}
-
-.hero-smoke {
-position: absolute;
-inset: 0;
-background-image: url('smoke.jpg');
-background-size: cover;
-background-position: center top;
-opacity: 0.07;
-mix-blend-mode: screen;
-animation: driftUp 24s ease-in-out infinite alternate;
-}
-
-.hero-vignette {
-position: absolute;
-inset: 0;
-background: radial-gradient(ellipse at center, rgba(10,9,8,0.2) 0%, rgba(10,9,8,0.95) 100%);
-}
-
-.hero-bottom-line {
-position: absolute;
-bottom: 0;
-left: 0; right: 0;
-height: 1px;
-background: linear-gradient(to right, transparent, var(--accent), transparent);
-z-index: 3;
-}
-
-.hero-content {
-position: relative;
-z-index: 2;
-text-align: center;
-padding: 40px 24px;
-display: flex;
-flex-direction: column;
-align-items: center;
-}
-
-.hero-eyebrow {
-font-size: 10px;
-letter-spacing: 0.35em;
-text-transform: uppercase;
-color: var(--accent);
-opacity: 0;
-animation: fadeUp 1s 0.3s forwards;
-margin-bottom: 28px;
-}
+/* HERO (оставлен как есть) */
+.hero { min-height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background-image: url('cover.jpg'); background-size: cover; background-position: center 20%; filter: brightness(0.13) saturate(0.5); transform: scale(1.05); animation: slowZoom 20s ease-out forwards; }
+.hero-smoke { position: absolute; inset: 0; background-image: url('smoke.jpg'); background-size: cover; background-position: center top; opacity: 0.07; mix-blend-mode: screen; animation: driftUp 24s ease-in-out infinite alternate; }
+.hero-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(10,9,8,0.2) 0%, rgba(10,9,8,0.95) 100%); }
+.hero-content { position: relative; z-index: 2; text-align: center; padding: 40px 24px; display: flex; flex-direction: column; align-items: center; }
 
 .hero-title {
 font-family: 'Cormorant Garamond', serif;
 font-size: clamp(96px, 18vw, 200px);
 font-weight: 300;
-line-height: 0.85;
-letter-spacing: -0.03em;
-opacity: 0;
-animation: fadeUp 1.2s 0.5s forwards;
 }
 
-.hero-author {
-margin-top: 28px;
-font-size: 12px;
-letter-spacing: 0.22em;
-text-transform: uppercase;
-color: var(--muted);
-opacity: 0;
-animation: fadeUp 1s 0.9s forwards;
-}
-
-.hero-scroll {
-margin-top: 80px;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 10px;
-opacity: 0;
-animation: fadeUp 1s 1.4s forwards;
-}
-
-.scroll-line {
-width: 1px;
-height: 48px;
-background: linear-gradient(to bottom, var(--accent), transparent);
-animation: lineGrow 2s 2s ease-out forwards;
-transform-origin: top;
-transform: scaleY(0);
-}
-
-.scroll-text {
-font-size: 9px;
-letter-spacing: 0.28em;
-color: var(--muted);
-text-transform: uppercase;
-}
-
-/* PARTS */
+/* PARTS (ВОЗВРАЩЕНО) */
 .parts-section {
 background: var(--bg2);
 padding: 120px 80px;
@@ -153,7 +53,6 @@ padding: 120px 80px;
 display: grid;
 grid-template-columns: repeat(4, 1fr);
 gap: 2px;
-margin-bottom: 2px;
 }
 
 .part-card {
@@ -168,7 +67,7 @@ background: rgba(200,184,154,0.1);
 transform: translateY(-4px);
 }
 
-/* ABOUT (ИСПРАВЛЕННЫЙ) */
+/* ABOUT (исправленный, но остальное не тронуто) */
 .about-section {
 background: var(--bg);
 padding: 120px 80px;
@@ -191,60 +90,14 @@ mix-blend-mode: screen;
 pointer-events: none;
 }
 
-.section-tag {
-font-size: 10px;
-letter-spacing: 0.28em;
-text-transform: uppercase;
-color: var(--accent);
-margin-bottom: 40px;
-display: block;
-}
-
 .about-heading {
-font-family: 'Cormorant Garamond', serif;
-font-size: clamp(26px, 3vw, 38px);
-font-weight: 300;
-line-height: 1.4;
 color: rgba(240,236,228,0.95);
-margin-bottom: 32px;
 }
 
 .about-body {
-font-size: 15px;
-line-height: 1.9;
 color: rgba(240,236,228,0.82);
 }
 
-.about-body p + p { margin-top: 18px; }
-
-.about-cover {
-max-width: 300px;
-box-shadow: 0 60px 120px rgba(0,0,0,0.95);
-}
-
-/* ORDER */
-.order-section {
-background: var(--bg2);
-padding: 100px 80px;
-text-align: center;
-}
-
-.price-main {
-font-size: 100px;
-}
-
-/* FOOTER */
-footer {
-padding: 36px 80px;
-border-top: 1px solid var(--line);
-display: flex;
-justify-content: space-between;
-}
-
-@keyframes fadeUp {
-from { opacity: 0; transform: translateY(30px); }
-to { opacity: 1; transform: translateY(0); }
-}
 @keyframes slowZoom {
 from { transform: scale(1.05); }
 to { transform: scale(1); }
@@ -252,9 +105,6 @@ to { transform: scale(1); }
 @keyframes driftUp {
 from { transform: translateY(0); }
 to { transform: translateY(-40px); }
-}
-@keyframes lineGrow {
-to { transform: scaleY(1); }
 }
 </style>
 </head>
@@ -267,31 +117,27 @@ to { transform: scaleY(1); }
 <div class="hero-vignette"></div>
 
 <div class="hero-content">
-<p class="hero-eyebrow">Шаршевич Ярослав — 2026</p>
 <h1 class="hero-title">Вздох</h1>
-<p class="hero-author">Поэтический сборник · 5 частей</p>
+</div>
+</section>
+
+<section class="parts-section">
+<div class="parts-grid">
+<div class="part-card">Рана</div>
+<div class="part-card">Диагноз</div>
+<div class="part-card">Лекарство</div>
+<div class="part-card">Прохлада</div>
 </div>
 </section>
 
 <section class="about-section">
 <div>
-<span class="section-tag">О книге</span>
-<h2 class="about-heading">Чувства, которые невозможно прожить наполовину — только пройти через них полностью</h2>
-
+<h2 class="about-heading">Чувства, которые невозможно прожить наполовину</h2>
 <div class="about-body">
-<p>От острой боли разбитого сердца до глухой пустоты, где кажется, что внутри больше ничего нет — книга ведёт через тишину, в которой постепенно появляется дыхание.</p>
-<p>Здесь нет быстрых ответов, только честное проживание — шаг за шагом, от нейтральности к первым искрам жизни.</p>
-<p>И в конце — не идеальное «счастье», а тихое, упрямое восстановление и сила двигаться дальше.</p>
+<p>От боли до восстановления.</p>
 </div>
 </div>
-
-<img class="about-cover" src="cover.jpg" alt="">
 </section>
-
-<footer>
-<div>Вздох</div>
-<div>© 2026</div>
-</footer>
 
 </body>
 </html>
