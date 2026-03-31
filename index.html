@@ -33,26 +33,27 @@ document.documentElement.classList.add('js');
 
 <style>
 :root {
---bg: #050505;
+--bg: #040404;
 --bg-2: #090909;
---bg-3: #101010;
+--bg-3: #0e0e10;
 --paper: #f1ece4;
---paper-soft: rgba(241, 236, 228, 0.78);
---muted: rgba(241, 236, 228, 0.48);
---line: rgba(255, 255, 255, 0.08);
---line-strong: rgba(255, 255, 255, 0.14);
+--paper-soft: rgba(241,236,228,0.78);
+--muted: rgba(241,236,228,0.46);
+--line: rgba(255,255,255,0.08);
+--line-strong: rgba(255,255,255,0.16);
 --gold: #ccb28b;
---gold-soft: rgba(204, 178, 139, 0.18);
---gold-strong: rgba(204, 178, 139, 0.4);
---danger: rgba(134, 41, 41, 0.25);
---cold: rgba(121, 140, 176, 0.22);
---heal: rgba(154, 180, 136, 0.22);
---air: rgba(186, 196, 214, 0.2);
---shadow: 0 20px 80px rgba(0, 0, 0, 0.38);
+--gold-soft: rgba(204,178,139,0.18);
+--gold-glow: rgba(204,178,139,0.34);
+--shadow: 0 20px 90px rgba(0,0,0,0.42);
 --radius: 28px;
 --radius-sm: 22px;
 --container: 1240px;
---ease: cubic-bezier(.22, .61, .36, 1);
+--ease: cubic-bezier(.22,.61,.36,1);
+--rana: rgba(140, 37, 37, 0.24);
+--diagnoz: rgba(109, 126, 160, 0.20);
+--lekarstvo: rgba(127, 156, 118, 0.20);
+--prohlada: rgba(188, 199, 219, 0.18);
+--final: rgba(204,178,139,0.16);
 }
 
 * {
@@ -70,8 +71,8 @@ min-height: 100vh;
 overflow-x: hidden;
 background:
 radial-gradient(circle at top center, rgba(204,178,139,0.05), transparent 28%),
-radial-gradient(circle at 20% 15%, rgba(255,255,255,0.03), transparent 20%),
-linear-gradient(180deg, #040404 0%, #080808 42%, #090909 100%);
+radial-gradient(circle at 20% 14%, rgba(255,255,255,0.03), transparent 22%),
+linear-gradient(180deg, #030303 0%, #070707 40%, #090909 100%);
 color: var(--paper);
 font-family: 'Inter', sans-serif;
 }
@@ -80,18 +81,18 @@ body::before {
 content: "";
 position: fixed;
 inset: 0;
-pointer-events: none;
 z-index: 0;
-opacity: 0.22;
+pointer-events: none;
+opacity: 0.2;
 background-image:
 linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
 linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
 background-size: 84px 84px;
-mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+mask-image: radial-gradient(circle at center, black 32%, transparent 80%);
 }
 
 ::selection {
-background: rgba(204, 178, 139, 0.24);
+background: rgba(204,178,139,0.24);
 color: #fff;
 }
 
@@ -119,7 +120,8 @@ margin: 0 auto;
 .particles,
 .cursor-glow,
 .floating-lines,
-.intro {
+.intro,
+.part-modal {
 pointer-events: none;
 }
 
@@ -148,7 +150,7 @@ position: absolute;
 width: 3px;
 height: 3px;
 border-radius: 50%;
-background: rgba(241, 236, 228, 0.22);
+background: rgba(241,236,228,0.22);
 box-shadow: 0 0 18px rgba(241,236,228,0.18);
 animation: particleRise linear infinite;
 }
@@ -179,7 +181,7 @@ position: absolute;
 white-space: nowrap;
 font-family: 'Cormorant Garamond', serif;
 font-style: italic;
-color: rgba(241, 236, 228, 0.05);
+color: rgba(241,236,228,0.05);
 letter-spacing: 0.06em;
 user-select: none;
 animation: driftLine linear infinite;
@@ -194,7 +196,7 @@ align-items: center;
 justify-content: center;
 background:
 radial-gradient(circle at center, rgba(204,178,139,0.06), transparent 24%),
-linear-gradient(180deg, #050505, #080808);
+linear-gradient(180deg, #040404, #080808);
 transition: opacity 1s ease, visibility 1s ease;
 }
 
@@ -729,6 +731,7 @@ transition: transform .18s ease-out, border-color .35s ease, background .35s eas
 transform-style: preserve-3d;
 will-change: transform;
 isolation: isolate;
+cursor: pointer;
 }
 
 .part-card::before {
@@ -753,25 +756,25 @@ opacity: 1;
 .part-card.rana:hover {
 background:
 linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)),
-linear-gradient(180deg, rgba(134,41,41,0.16), rgba(255,255,255,0.02));
+linear-gradient(180deg, rgba(140,37,37,0.16), rgba(255,255,255,0.02));
 }
 
 .part-card.diagnoz:hover {
 background:
 linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)),
-linear-gradient(180deg, rgba(121,140,176,0.12), rgba(255,255,255,0.02));
+linear-gradient(180deg, rgba(109,126,160,0.12), rgba(255,255,255,0.02));
 }
 
 .part-card.lekarstvo:hover {
 background:
 linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)),
-linear-gradient(180deg, rgba(154,180,136,0.12), rgba(255,255,255,0.02));
+linear-gradient(180deg, rgba(127,156,118,0.12), rgba(255,255,255,0.02));
 }
 
 .part-card.prohlada:hover {
 background:
 linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03)),
-linear-gradient(180deg, rgba(186,196,214,0.12), rgba(255,255,255,0.02));
+linear-gradient(180deg, rgba(188,199,219,0.12), rgba(255,255,255,0.02));
 }
 
 .part-inner {
@@ -852,6 +855,7 @@ linear-gradient(180deg, rgba(204,178,139,0.10), rgba(204,178,139,0.03)),
 rgba(255,255,255,0.02);
 overflow: hidden;
 box-shadow: 0 18px 60px rgba(0,0,0,0.18);
+cursor: pointer;
 }
 
 .special-part::before {
@@ -1310,6 +1314,170 @@ color: var(--muted);
 text-align: right;
 }
 
+.part-modal {
+position: fixed;
+inset: 0;
+z-index: 140;
+opacity: 0;
+visibility: hidden;
+transition: opacity .45s ease, visibility .45s ease;
+}
+
+.part-modal.open {
+opacity: 1;
+visibility: visible;
+pointer-events: auto;
+}
+
+.part-modal-backdrop {
+position: absolute;
+inset: 0;
+background: rgba(0,0,0,0.76);
+backdrop-filter: blur(16px);
+}
+
+.part-modal-panel {
+position: absolute;
+inset: 24px;
+border-radius: 30px;
+border: 1px solid rgba(255,255,255,0.10);
+overflow: hidden;
+box-shadow: 0 40px 120px rgba(0,0,0,0.45);
+display: grid;
+grid-template-columns: minmax(240px, 340px) 1fr;
+background:
+linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+rgba(10,10,10,0.92);
+transform: scale(.96);
+transition: transform .45s var(--ease);
+}
+
+.part-modal.open .part-modal-panel {
+transform: scale(1);
+}
+
+.part-modal-side {
+position: relative;
+border-right: 1px solid rgba(255,255,255,0.08);
+padding: 34px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+overflow: hidden;
+}
+
+.part-modal-side::before {
+content: "";
+position: absolute;
+inset: 0;
+background: var(--modal-bg, rgba(204,178,139,0.14));
+opacity: .9;
+}
+
+.part-modal-side::after {
+content: "";
+position: absolute;
+inset: 0;
+background: url('smoke.jpg') center / cover no-repeat;
+mix-blend-mode: screen;
+opacity: .12;
+}
+
+.part-modal-side > * {
+position: relative;
+z-index: 1;
+}
+
+.part-modal-num {
+font-family: 'Cormorant Garamond', serif;
+font-size: clamp(80px, 12vw, 160px);
+line-height: .85;
+color: rgba(255,255,255,0.75);
+}
+
+.part-modal-label {
+margin-top: 12px;
+font-size: 11px;
+letter-spacing: .26em;
+text-transform: uppercase;
+color: rgba(255,255,255,0.72);
+}
+
+.part-modal-body {
+padding: 40px;
+position: relative;
+overflow-y: auto;
+}
+
+.part-modal-close {
+position: absolute;
+top: 18px;
+right: 18px;
+width: 46px;
+height: 46px;
+border-radius: 50%;
+border: 1px solid rgba(255,255,255,0.12);
+background: rgba(255,255,255,0.04);
+color: var(--paper);
+display: grid;
+place-items: center;
+cursor: pointer;
+transition: transform .3s ease, background .3s ease;
+z-index: 2;
+}
+
+.part-modal-close:hover {
+transform: rotate(90deg);
+background: rgba(255,255,255,0.08);
+}
+
+.part-modal-kicker {
+font-size: 11px;
+letter-spacing: .28em;
+text-transform: uppercase;
+color: var(--gold);
+margin-bottom: 18px;
+}
+
+.part-modal-title {
+font-family: 'Cormorant Garamond', serif;
+font-size: clamp(40px, 5vw, 74px);
+line-height: .95;
+letter-spacing: -.04em;
+font-weight: 300;
+max-width: 760px;
+}
+
+.part-modal-text {
+margin-top: 26px;
+max-width: 860px;
+color: rgba(241,236,228,0.76);
+font-size: 16px;
+line-height: 2;
+}
+
+.part-modal-text p + p {
+margin-top: 16px;
+}
+
+.part-modal-bottom {
+margin-top: 30px;
+display: flex;
+flex-wrap: wrap;
+gap: 12px;
+}
+
+.modal-pill {
+padding: 12px 16px;
+border-radius: 999px;
+border: 1px solid rgba(255,255,255,0.10);
+background: rgba(255,255,255,0.04);
+font-size: 12px;
+letter-spacing: .14em;
+text-transform: uppercase;
+color: var(--paper-soft);
+}
+
 .reveal {
 opacity: 1;
 transform: translateY(0);
@@ -1383,7 +1551,8 @@ to { opacity: 1; transform: translateY(0); }
 @media (max-width: 1120px) {
 .hero-grid,
 .about-grid,
-.experience-grid {
+.experience-grid,
+.part-modal-panel {
 grid-template-columns: 1fr;
 }
 
@@ -1420,6 +1589,12 @@ border-bottom: 1px solid rgba(255,255,255,0.08);
 padding-right: 0;
 padding-bottom: 16px;
 }
+
+.part-modal-side {
+min-height: 240px;
+border-right: 0;
+border-bottom: 1px solid rgba(255,255,255,0.08);
+}
 }
 
 @media (max-width: 860px) {
@@ -1449,7 +1624,8 @@ font-size: clamp(72px, 20vw, 124px);
 .exp-text,
 .special-desc,
 .timeline-desc,
-.price-note {
+.price-note,
+.part-modal-text {
 font-size: 14px;
 }
 
@@ -1461,7 +1637,8 @@ padding: 96px 0;
 .about-copy-card,
 .price-card,
 .feature-list,
-.exp-left {
+.exp-left,
+.part-modal-body {
 padding-left: 24px;
 padding-right: 24px;
 }
@@ -1470,7 +1647,8 @@ padding-right: 24px;
 .about-media-card,
 .exp-panel,
 .part-card,
-.special-part {
+.special-part,
+.part-modal-panel {
 border-radius: 24px;
 }
 
@@ -1509,11 +1687,13 @@ text-align: center;
 }
 
 .hero-actions,
-.price-actions {
+.price-actions,
+.part-modal-bottom {
 flex-direction: column;
 }
 
-.btn {
+.btn,
+.modal-pill {
 width: 100%;
 }
 
@@ -1537,7 +1717,8 @@ font-size: 30px;
 
 .section-title,
 .about-title,
-.exp-heading {
+.exp-heading,
+.part-modal-title {
 line-height: 1.02;
 }
 
@@ -1572,12 +1753,18 @@ padding-bottom: 12px;
 .price-card,
 .feature-list,
 .exp-left,
-.about-copy-card {
+.about-copy-card,
+.part-modal-body,
+.part-modal-side {
 padding: 24px;
 }
 
 .intro-sub {
 letter-spacing: 0.22em;
+}
+
+.part-modal-panel {
+inset: 12px;
 }
 }
 
@@ -1701,7 +1888,8 @@ display: none !important;
 </div>
 
 <div class="cards-grid">
-<article class="part-card rana reveal reveal-delay-1 tilt-card" data-tilt-strength="10">
+<article class="part-card rana reveal reveal-delay-1 tilt-card" data-tilt-strength="10"
+data-part='{"num":"I","label":"Начало","title":"Рана","bg":"var(--rana)","text":["Острая боль, с которой всё начинается. Момент, когда внутри что-то ломается слишком громко, чтобы это можно было не услышать.","Это фаза удара. Всё ещё живо, остро, раскалённо. Здесь нет дистанции между человеком и чувствами — только прямая, почти невыносимая близость к переживанию.","В этой части текст звучит как внутренний разлом: не объяснение, а вспышка. Не вывод, а первое настоящее столкновение с потерей."],"pills":["Острая фаза","Эмоциональный удар","Точка разлома"]}'>
 <div class="part-inner">
 <div class="part-top">
 <div class="part-num">I</div>
@@ -1716,7 +1904,8 @@ display: none !important;
 </div>
 </article>
 
-<article class="part-card diagnoz reveal reveal-delay-2 tilt-card" data-tilt-strength="10">
+<article class="part-card diagnoz reveal reveal-delay-2 tilt-card" data-tilt-strength="10"
+data-part='{"num":"II","label":"Тишина","title":"Диагноз","bg":"var(--diagnoz)","text":["Глухая пустота — когда боль становится привычной. Не вспышка, а длинный коридор, в котором чувства звучат приглушённо.","Это состояние не про крик, а про онемение. Про момент, когда переживание будто перестаёт двигаться и превращается в фоновую тяжесть.","Здесь книга становится холоднее, медленнее, строже. Боль уже не режет — она оседает внутри и становится атмосферой."],"pills":["Онемение","Холод","Долгая пустота"]}'>
 <div class="part-inner">
 <div class="part-top">
 <div class="part-num">II</div>
@@ -1731,7 +1920,8 @@ display: none !important;
 </div>
 </article>
 
-<article class="part-card lekarstvo reveal reveal-delay-3 tilt-card" data-tilt-strength="10">
+<article class="part-card lekarstvo reveal reveal-delay-3 tilt-card" data-tilt-strength="10"
+data-part='{"num":"III","label":"Поворот","title":"Лекарство","bg":"var(--lekarstvo)","text":["Тишина, в которой постепенно появляется дыхание. Не спасение, а первая едва заметная возможность снова почувствовать жизнь.","Это не счастливый перелом, а очень тонкое смещение. Будто внутри впервые за долгое время появляется пространство, в котором можно не только страдать, но и дышать.","Часть про осторожное возвращение чувствительности. Не к прошлому — к возможности снова быть живым."],"pills":["Первый воздух","Мягкий свет","Поворот внутрь"]}'>
 <div class="part-inner">
 <div class="part-top">
 <div class="part-num">III</div>
@@ -1746,7 +1936,8 @@ display: none !important;
 </div>
 </article>
 
-<article class="part-card prohlada reveal reveal-delay-4 tilt-card" data-tilt-strength="10">
+<article class="part-card prohlada reveal reveal-delay-4 tilt-card" data-tilt-strength="10"
+data-part='{"num":"IV","label":"Возвращение","title":"Прохлада","bg":"var(--prohlada)","text":["Тихое, упрямое возвращение к себе. Уже не к прошлому, а к новому внутреннему равновесию, которое собирается заново.","Это состояние не про торжество, а про устойчивость. Про способность больше не рушиться от каждого воспоминания.","Здесь появляется прохлада — не как холод, а как ясность. Как воздух после долгой внутренней духоты."],"pills":["Ясность","Собранность","Тихая сила"]}'>
 <div class="part-inner">
 <div class="part-top">
 <div class="part-num">IV</div>
@@ -1762,7 +1953,8 @@ display: none !important;
 </article>
 </div>
 
-<div class="special-part reveal">
+<div class="special-part reveal" id="specialPart"
+data-part='{"num":"V","label":"Неофициальная часть","title":"То, что нужно прочувствовать","bg":"var(--final)","text":["Один большой стих. Финальный выдох — то, что остаётся, когда слова уже почти заканчиваются, а чувство всё ещё продолжает жить внутри.","Это не просто конец книги, а отдельное пространство. Не вывод и не итог, а состояние, в котором человек остаётся наедине с самым чистым остатком переживания.","Здесь уже почти нет объяснений. Только проживание. Только то, что не читают глазами — а пропускают через себя."],"pills":["Финальный выдох","Один большой стих","Чистое ощущение"]}'>
 <div class="special-side">
 <div class="special-num">V</div>
 </div>
@@ -1955,6 +2147,33 @@ display: none !important;
 </footer>
 </div>
 
+<div class="part-modal" id="partModal" aria-hidden="true">
+<div class="part-modal-backdrop" id="partModalBackdrop"></div>
+<div class="part-modal-panel">
+<div class="part-modal-side" id="partModalSide">
+<div>
+<div class="part-modal-num" id="modalNum">I</div>
+<div class="part-modal-label" id="modalLabel">Начало</div>
+</div>
+</div>
+
+<div class="part-modal-body">
+<button class="part-modal-close" id="partModalClose" aria-label="Закрыть">
+<svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+<path d="M4 4L14 14M14 4L4 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+</svg>
+</button>
+
+<div class="part-modal-kicker">Состояние книги</div>
+<h3 class="part-modal-title" id="modalTitle">Рана</h3>
+
+<div class="part-modal-text" id="modalText"></div>
+
+<div class="part-modal-bottom" id="modalPills"></div>
+</div>
+</div>
+</div>
+
 <script>
 const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
 const cursorGlow = document.querySelector('.cursor-glow');
@@ -2087,6 +2306,49 @@ el.style.animationDelay = `${Math.random() * 10}s`;
 floatingLines.appendChild(el);
 }
 }
+
+const partModal = document.getElementById('partModal');
+const partModalBackdrop = document.getElementById('partModalBackdrop');
+const partModalClose = document.getElementById('partModalClose');
+const modalNum = document.getElementById('modalNum');
+const modalLabel = document.getElementById('modalLabel');
+const modalTitle = document.getElementById('modalTitle');
+const modalText = document.getElementById('modalText');
+const modalPills = document.getElementById('modalPills');
+const partModalSide = document.getElementById('partModalSide');
+
+function openPartModal(data) {
+modalNum.textContent = data.num || '';
+modalLabel.textContent = data.label || '';
+modalTitle.textContent = data.title || '';
+modalText.innerHTML = (data.text || []).map(p => `<p>${p}</p>`).join('');
+modalPills.innerHTML = (data.pills || []).map(p => `<div class="modal-pill">${p}</div>`).join('');
+partModalSide.style.setProperty('--modal-bg', data.bg || 'rgba(204,178,139,0.14)');
+partModal.classList.add('open');
+partModal.setAttribute('aria-hidden', 'false');
+document.body.style.overflow = 'hidden';
+}
+
+function closePartModal() {
+partModal.classList.remove('open');
+partModal.setAttribute('aria-hidden', 'true');
+document.body.style.overflow = '';
+}
+
+document.querySelectorAll('[data-part]').forEach((el) => {
+el.addEventListener('click', () => {
+try {
+const data = JSON.parse(el.dataset.part);
+openPartModal(data);
+} catch (e) {}
+});
+});
+
+partModalBackdrop.addEventListener('click', closePartModal);
+partModalClose.addEventListener('click', closePartModal);
+window.addEventListener('keydown', (e) => {
+if (e.key === 'Escape') closePartModal();
+});
 </script>
 </body>
 </html>
