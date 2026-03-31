@@ -43,7 +43,6 @@ document.documentElement.classList.add('js');
 --line-strong: rgba(255,255,255,0.16);
 --gold: #ccb28b;
 --gold-soft: rgba(204,178,139,0.18);
---gold-glow: rgba(204,178,139,0.34);
 --shadow: 0 20px 90px rgba(0,0,0,0.42);
 --radius: 28px;
 --radius-sm: 22px;
@@ -91,6 +90,16 @@ background-size: 84px 84px;
 mask-image: radial-gradient(circle at center, black 32%, transparent 80%);
 }
 
+body::after {
+content: "";
+position: fixed;
+inset: -20%;
+background: radial-gradient(circle at 50% 50%, rgba(204,178,139,0.05), transparent 40%);
+animation: breatheBg 12s ease-in-out infinite;
+z-index: 0;
+pointer-events: none;
+}
+
 ::selection {
 background: rgba(204,178,139,0.24);
 color: #fff;
@@ -119,7 +128,6 @@ margin: 0 auto;
 .noise,
 .particles,
 .cursor-glow,
-.floating-lines,
 .intro,
 .part-modal {
 pointer-events: none;
@@ -129,7 +137,7 @@ pointer-events: none;
 position: fixed;
 inset: 0;
 z-index: 1;
-opacity: 0.05;
+opacity: 0.04;
 background-image:
 radial-gradient(circle at 20% 20%, rgba(255,255,255,0.16) 0.8px, transparent 0.8px),
 radial-gradient(circle at 80% 30%, rgba(255,255,255,0.12) 0.7px, transparent 0.7px),
@@ -150,8 +158,8 @@ position: absolute;
 width: 3px;
 height: 3px;
 border-radius: 50%;
-background: rgba(241,236,228,0.22);
-box-shadow: 0 0 18px rgba(241,236,228,0.18);
+background: rgba(241,236,228,0.18);
+box-shadow: 0 0 18px rgba(241,236,228,0.12);
 animation: particleRise linear infinite;
 }
 
@@ -167,24 +175,6 @@ transform: translate(-50%, -50%);
 background: radial-gradient(circle, rgba(204,178,139,0.09) 0%, rgba(204,178,139,0.04) 28%, rgba(204,178,139,0) 70%);
 mix-blend-mode: screen;
 opacity: 0.9;
-}
-
-.floating-lines {
-position: fixed;
-inset: 0;
-z-index: 1;
-overflow: hidden;
-}
-
-.floating-line {
-position: absolute;
-white-space: nowrap;
-font-family: 'Cormorant Garamond', serif;
-font-style: italic;
-color: rgba(241,236,228,0.05);
-letter-spacing: 0.06em;
-user-select: none;
-animation: driftLine linear infinite;
 }
 
 .intro {
@@ -420,6 +410,7 @@ background: linear-gradient(90deg, rgba(204,178,139,1), transparent);
 }
 
 .hero-title {
+position: relative;
 font-family: 'Cormorant Garamond', serif;
 font-weight: 300;
 font-size: clamp(82px, 15vw, 210px);
@@ -428,6 +419,16 @@ letter-spacing: -0.05em;
 text-shadow: 0 8px 40px rgba(0,0,0,0.45);
 opacity: 0;
 animation: fadeUp 1.15s .35s forwards;
+}
+
+.hero-title::after {
+content: "Вздох";
+position: absolute;
+left: 0;
+top: 0;
+color: rgba(204,178,139,0.12);
+filter: blur(22px);
+z-index: -1;
 }
 
 .hero-meta {
@@ -732,7 +733,12 @@ transform-style: preserve-3d;
 will-change: transform;
 isolation: isolate;
 cursor: pointer;
+animation: floatCard 6s ease-in-out infinite;
 }
+
+.part-card:nth-child(2) { animation-delay: 1s; }
+.part-card:nth-child(3) { animation-delay: 2s; }
+.part-card:nth-child(4) { animation-delay: 3s; }
 
 .part-card::before {
 content: "";
@@ -1350,6 +1356,7 @@ linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
 rgba(10,10,10,0.92);
 transform: scale(.96);
 transition: transform .45s var(--ease);
+backdrop-filter: blur(30px);
 }
 
 .part-modal.open .part-modal-panel {
@@ -1533,11 +1540,6 @@ to { transform: translate3d(0, -32px, 0) scale(1.08); }
 100% { transform: translate3d(0, 0, 0); }
 }
 
-@keyframes driftLine {
-from { transform: translate3d(0, 0, 0); }
-to { transform: translate3d(-120px, -40px, 0); }
-}
-
 @keyframes introLine {
 from { width: 0; opacity: 0; }
 to { width: min(72vw, 340px); opacity: 1; }
@@ -1546,6 +1548,17 @@ to { width: min(72vw, 340px); opacity: 1; }
 @keyframes introText {
 from { opacity: 0; transform: translateY(14px); }
 to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes breatheBg {
+0% { transform: scale(1); opacity: 0.4; }
+50% { transform: scale(1.2); opacity: 0.7; }
+100% { transform: scale(1); opacity: 0.4; }
+}
+
+@keyframes floatCard {
+0%,100% { transform: translateY(0px); }
+50% { transform: translateY(-10px); }
 }
 
 @media (max-width: 1120px) {
@@ -1656,8 +1669,7 @@ border-radius: 24px;
 grid-template-columns: 1fr;
 }
 
-.cursor-glow,
-.floating-lines {
+.cursor-glow {
 display: none;
 }
 }
@@ -1799,7 +1811,6 @@ display: none !important;
 <div class="cursor-glow" aria-hidden="true"></div>
 <div class="noise" aria-hidden="true"></div>
 <div class="particles" aria-hidden="true" id="particles"></div>
-<div class="floating-lines" aria-hidden="true" id="floatingLines"></div>
 
 <div class="site-shell">
 <header class="topbar" id="topbar">
@@ -2282,30 +2293,6 @@ el.addEventListener('mouseleave', reset);
 }
 
 document.querySelectorAll('.tilt-card').forEach(setupTilt);
-
-const floatingLines = document.getElementById('floatingLines');
-const phrases = [
-'внутри снова появляется воздух',
-'тишина становится формой боли',
-'не счастье, а восстановление',
-'то, что нужно прочувствовать',
-'пять состояний · один путь',
-'когда слова заканчиваются'
-];
-
-if (floatingLines && !isTouch) {
-for (let i = 0; i < 7; i++) {
-const el = document.createElement('div');
-el.className = 'floating-line';
-el.textContent = phrases[i % phrases.length];
-el.style.left = `${Math.random() * 70 + 8}%`;
-el.style.top = `${Math.random() * 80 + 6}%`;
-el.style.fontSize = `${Math.random() * 18 + 18}px`;
-el.style.animationDuration = `${Math.random() * 18 + 18}s`;
-el.style.animationDelay = `${Math.random() * 10}s`;
-floatingLines.appendChild(el);
-}
-}
 
 const partModal = document.getElementById('partModal');
 const partModalBackdrop = document.getElementById('partModalBackdrop');
